@@ -4,7 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import {useFormik} from 'formik'
 import Form from 'react-bootstrap/Form';
 import * as yup from 'yup'
-
+import { userData } from "../Redux/action";
+import { useSelector, useDispatch } from "react-redux";
 
 const initialValues = {
     name:"",
@@ -13,30 +14,37 @@ const initialValues = {
     roll_n:""
 }
 
+const validationSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  class: yup.string().required("Class is required "),
+  section:yup.string().required("section is required"),
+  roll_n:yup.number().required("roll number is required")
+
+})
+
 
 
 function Dashboard() {
 
     const [show, setShow] = React.useState(false);
+    
+  const dispatch = useDispatch();
     const form = {};
-    const formik = useFormik({
-        initialValues
+    var formik = useFormik({
+        initialValues,
+        validationSchema
     })
 
     const name_prop = formik.getFieldProps("name")
     const class_prop = formik.getFieldProps("class")
-    const section = formik.getFieldProps("section")
-    const roll_n = formik.getFieldProps("roll_n")
+    const section_prop = formik.getFieldProps("section")
+    const rolln_prop = formik.getFieldProps("roll_n")
 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  const handleSubmit = (e)=>{
-    e.preventDefault()
 
-
-  }
 
   React.useEffect(()=>{
     form.name = formik.values.name;
@@ -45,6 +53,14 @@ function Dashboard() {
     form.roll_n = formik.values.roll_n;
 
   },[formik,form])
+
+const handleClick = ()=>{
+  dispatch(userData(formik.values))
+  localStorage.setItem("UserData",JSON.stringify(formik.values))
+  console.log(formik.values)
+  window.location.reload();
+
+}
 
 
 
@@ -71,35 +87,69 @@ function Dashboard() {
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter name" />
+        <Form.Control 
+        value={form.name}
+        type="text" 
+        placeholder="Enter name" 
+        {...name_prop} />
+        {formik.touched.name && formik.errors.name ? (
+          <div className="text-danger fw-bold" >{formik.errors.name}</div>
+        ):null}
        
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Class</Form.Label>
-        <Form.Control type="text" placeholder="Class" />
+        <Form.Control
+        value={form.class}
+         type="text"
+          placeholder="Class" 
+          {...class_prop} />
+           {formik.touched.class &&
+              formik.errors.class ? (
+                <div className="text-danger fw-bold">
+                  {formik.errors.class}
+                </div>
+              ) : null} 
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Section</Form.Label>
-        <Form.Control type="text" placeholder='section' />
+        <Form.Control 
+        value={form.section}
+        type="text" placeholder='section'
+         {...section_prop}/>
+          {formik.touched.section &&
+              formik.errors.section ? (
+                <div className="text-danger fw-bold">
+                  {formik.errors.section}
+                </div>
+              ) : null} 
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Roll number</Form.Label>
-        <Form.Control type="Number" placeholder="Number" />
+        <Form.Control 
+        value={form.roll_n}
+        type="Number" 
+        placeholder="Number"
+         {...rolln_prop} />
+          {formik.touched.roll_n &&
+              formik.errors.roll_n ? (
+                <div className="text-danger fw-bold">
+                  {formik.errors.roll_n}
+                </div>
+              ) : null} 
       </Form.Group>
       
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+  
     </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Submit</Button>
+          <Button variant="primary" onClick={handleClick}>Submit</Button>
         </Modal.Footer>
       </Modal>
         <div>

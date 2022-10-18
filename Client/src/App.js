@@ -1,6 +1,5 @@
 import logo from './logo.svg';
-import { useEffect } from 'react';
-import axios from 'axios'
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -15,22 +14,13 @@ import Topnav from './components/Navbar/navbar.jsx'
 import { jsPDF } from "jspdf";
 import { html2canvas } from "html2canvas"
 import html2PDF from 'jspdf-html2canvas';
-import {Login }from './components/Login/Login.jsx'
-import {Routes,Route} from 'react-router'
-import Dashboard from './components/Dashboard/Dashboard.jsx'
-
+import {Login} from './components/Login/Login.jsx'
+import Dashboard from  './components/Dashboard/Dashboard.jsx'
+import {User} from './components/User/User.jsx'
 
 
 
 function App() {
-
-
-  
-  
-
-
-
-
   const handlePrint = () => {
     let page = document.getElementById("print")
     html2PDF(page, {
@@ -43,19 +33,11 @@ function App() {
   }
   return (
     <div>
-     
-      <Routes>
-        <Route path='/' element={<Login/>}/>
-        <Route path='/home' element={ <Dashboard/>}/>
-      
-      </Routes>
-      
- 
+      {/* <Login/> */}
+      <User/>
+      <Dashboard/>
 
-      
-   
-
-      {/* <div className="App" style={{ minWidth: '460px', marginBottom: '100px' }}>
+      <div className="App" style={{ minWidth: '460px', marginBottom: '100px' }}>
         <Topnav handlePrint={handlePrint} style={{width:'500px'}}/>
           
         <Container id="print" className='mt-3'>
@@ -66,8 +48,8 @@ function App() {
             <Col lg={12} xs={12} md={12} sm={12}> <Part3 /> </Col>
             <Col lg={12} xs={12} md={12} sm={12}> <Part4 /> </Col>
           </Row>
-        </Container> */}
-      {/* </div> */}
+        </Container>
+      </div>
 
     </div>
   );

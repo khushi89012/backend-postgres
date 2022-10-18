@@ -1,52 +1,3 @@
-
-export const Login = (data)=>({
-type:"LOGIN",
-payload:data
-})
-
-export const Token = (data)=>({
-  type:"TOKEN",
-  payload:data
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const persistTodos = () => ({
     type: "PERSIST_TODOS"
   });
@@ -65,6 +16,11 @@ export const persistTodos = () => ({
   export const Part3 = value => ({
     type: "PART3",
     payload : value
+  })
+
+  export const userData = data =>({
+    type:"USER",
+    payload:data
   })
 
 

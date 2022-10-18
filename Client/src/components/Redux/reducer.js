@@ -1,55 +1,37 @@
 const initialState = {
- token:"",
- islogged:false
+  part3: JSON.parse(localStorage.getItem("part3")) || [],
+  part1: JSON.parse(localStorage.getItem("part1")) || [],
+  part2: JSON.parse(localStorage.getItem("part2")) || [],
+  user: [],
 };
 
-
-const logindata = {
-   email : '',
-   password:'',
-  
-}
-
-
-
-export const loginreducer = (state=logindata,{type, payload})=>{
-   
-if(type === "LOGIN"){
-return {
-   ...state,
-   email: payload.email,
-   password:payload.password
-}
-}
-
-else {
-   return state;
-}
-}
-
-
-
-
-
-
-
-
-
-
-
 export const partData = (state = initialState, { type, payload }) => {
+  console.log(payload);
+  switch (type) {
+    case "PART1":
+      return {
+        ...state,
+        part1: payload,
+      };
 
-   switch (type) {
-      case "TOKEN":
-         return {
-            ...state,
-           token: payload ,
-           islogged:true
-         };   
-      default:
-         return state;
-   }
-}
+    case "PART2":
+      return {
+        ...state,
+        part2: payload,
+      };
 
+    case "PART3":
+      return {
+        ...state,
+        part3: [...state.part3, payload],
+      };
+    case "USER":
+      return {
+        ...state,
+        user: [payload],
+      };
 
-
+    default:
+      return state;
+  }
+};

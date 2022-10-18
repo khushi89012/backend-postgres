@@ -4,13 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Sidebar} from '../Sidebar/Sidebar'
 import { Pdfmaker } from '../Download/sample';
-import axios from "axios";
-import React,{useEffect} from "react";
 function Topnav({handlePrint}) {
-
-  
-
-
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
