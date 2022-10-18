@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
@@ -17,6 +16,12 @@ import html2PDF from 'jspdf-html2canvas';
 import {Login} from './components/Login/Login.jsx'
 import Dashboard from  './components/Dashboard/Dashboard.jsx'
 import {User} from './components/User/User.jsx'
+import Footer from './components/Footer/Footer.jsx'
+import Footer1 from './components/Footer/Footer.jsx'
+
+
+
+import {useSelector} from "react-redux"
 
 
 
@@ -31,15 +36,31 @@ function App() {
       output: '/Download.pdf'
     });
   }
+
+  const data = useSelector(state=>state);
+
+  const part1 = useSelector(state=>state.part1);
+  const part2 = useSelector(state=>state.part2);
+
+
+
+  const handleClick = () => {
+    console.log("Part1", part1)
+    console.log("Part2", part2)
+
+    // console.log("whole Data", data)
+  }
+
+
+
   return (
     <div>
       {/* <Login/> */}
-      <User/>
+      {/* <User/> */}
       <Dashboard/>
 
       <div className="App" style={{ minWidth: '460px', marginBottom: '100px' }}>
         <Topnav handlePrint={handlePrint} style={{width:'500px'}}/>
-          
         <Container id="print" className='mt-3'>
           <Row className="p-0" style={{ border: "5px solid black" }}>
             <Col lg={12} xs={12} md={12} sm={12}> <Header /></Col>
@@ -50,11 +71,14 @@ function App() {
           </Row>
         </Container>
       </div>
-
+      {(part1.length < 2 || part2.length < 2) ?(
+        <div className="text-center p-3"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.2)", cursor : "not-allowed" }}>
+          SEND DATA
+        </div>
+      ) : <Footer handleSend={handleClick}/>}
     </div>
   );
 }
-
-
 
 export default App;
