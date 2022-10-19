@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const partData = (state = initialState, { type, payload }) => {
-  console.log(payload);
+  // console.log(payload);
   switch (type) {
     case "PART1":
       return {
