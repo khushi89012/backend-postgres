@@ -34,7 +34,7 @@ module.exports = {
                 resolve(data);
             })
             .catch(function (err) {
-                console.log(err,message)
+                console.log(err.message)
                 rej(err)
             });
         })

@@ -21,8 +21,11 @@ import Footer1 from "./components/Footer/Footer.jsx";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import ScoreCard from './components/ScoreCard/ScoreCard.jsx'
+import axios from "axios";
 
 function App() {
+
+  
   const handlePrint = () => {
     let page = document.getElementById("print");
     html2PDF(page, {
@@ -35,23 +38,38 @@ function App() {
   };
 
   const data = useSelector((state) => state);
+const name = data.user.name
+const userclass = data.user.class;
+const section = data.user.section
+const roll_n = data.user.roll_n
 
   const part1 = useSelector((state) => state.part1);
   const part2 = useSelector((state) => state.part2);
 
   const handleClick = () => {
     console.log("whole Data", data);
+    // axios.post('http://localhost:8080/addata',{
+    //   'Name':name,
+    //   'Class':userclass,
+    //   'Section':section,
+    //   'Roll_n':roll_n
+    // }).then((res)=>{
+    //   console.log(res)
+    // }).catch(err){
+    //   console.log(err.message)
+    // }
   };
 
   return (
     <div>
-      <Routes>
+      {/* <Routes>
         <Route to={"/"} element={<Login/>}/>
         <Route to={"/user"} element={<User/>}/>
-        <Route to={"/home"} element={ <Dashboard />}/>
+        <Route to={"/home"} element={}/>
      
-      </Routes>
-     
+      </Routes> */}
+      <User/>
+      <Dashboard />
 
       <div className="App" style={{ minWidth: "460px", marginBottom: "100px" }}>
         <Topnav handlePrint={handlePrint} style={{ width: "500px" }} />

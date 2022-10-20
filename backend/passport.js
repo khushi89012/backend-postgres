@@ -17,7 +17,7 @@ isValidPassword = async function (newPassword, existiongPassword) {
     }
 }
 passport.use(
-	'jwtAdm',
+	'jwt',
 	new JwtStrategy(
 		{
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -25,6 +25,7 @@ passport.use(
 		},
 		async (payload, done) => {
 			try {
+				console.log("this is payload" ,payload)
 				if (!payload.admin) {
 					return done(null, { id: 0 });
 				}
