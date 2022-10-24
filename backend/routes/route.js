@@ -26,9 +26,14 @@ router.post(
 );
 
 router.post("/addata", 
-// add_user(userModel),
-//  update_user(userModel),
+// add_user(userModel), //creating error 
   passportDataAdd,
    studentController.user_add);
+
+  //  router.put('/update/:id', 
+  //  update_user(userModel), //creating error
+
+  //  passportDataAdd,
+  //  studentController.user_add);
 
 module.exports = router;

@@ -16,4 +16,15 @@ module.exports = {
       return res.status(401).json(return_err);
     }
   },
+  user_update: async (req, res, next) => {
+ 
+    if (Number.isInteger(req.user.roll_n) && req.user.roll_n > 0) {
+     
+      next();
+    
+  } else {
+    let return_err = { status: 5, message: "Invalid user data" };
+    return res.status(401).json(return_err);
+  }
+},
 };

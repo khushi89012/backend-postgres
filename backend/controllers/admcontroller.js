@@ -3,10 +3,13 @@ const { request } = require("express");
 const JWT = require('jsonwebtoken');
 const Config= require("../configuration/config")
 
-AdmloginToken = () => {
+AdmloginToken = (admin_data) => {
 	console.log(Config.jwt.secret)
 	return JWT.sign(
 		{
+			// id:admin_data.id,
+			// username:admin_data.username,
+			// password:admin_data.password
 			
 			
 		},
@@ -19,11 +22,11 @@ module.exports = {
        
 		if (Number.	isInteger(req.user.id) && req.user.id > 0) {
 			// console.log("this is userdata",req.user)
-			let adm_data={
-				admin_id:Cryptr.encrypt(req.user.id),
-				username:req.user.username,
-				password:req.user.password
-			}
+			// let adm_data={
+			// 	admin_id:req.user.id,
+			// 	username:req.user.username,
+			// 	password:req.user.password
+			// }
 			// console.log("this is adm_data",adm_data)
 		next();
 		} else {
